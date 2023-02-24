@@ -1,0 +1,24 @@
+<project name="snax">
+  <property name="src.dir" value="src" />
+  <property name="build.dir" value="build" />
+  <property name="classes.dir" value="${build.dir}/classes" />
+  <property name="jar.dir" value="${build.dir}/jar" />
+
+  <target name="build">
+    <mkdir dir="${classes.dir}" />
+    <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false" />
+    <jar basedir="${classes.dir}" destfile="${jar.dir}/${ant.project.name}.jar">
+      <manifest>
+        <attribute name="Main-Class" value="snax.App" />
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="run" depends="build">
+    <java jar="${jar.dir}/${ant.project.name}.jar" fork="true" />
+  </target>
+
+  <target name="clean">
+    <delete dir="build" />
+  </target>
+</project>
